@@ -1,0 +1,4 @@
+numpy~=2.0.1
+qiskit~=1.1.1
+qiskit-aer~=0.14.2
+tweedledum~=1.1.1
