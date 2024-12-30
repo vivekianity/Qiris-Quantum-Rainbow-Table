@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Quantum Rainbow Tables</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+</head>
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header" class="alt">
+            <a href="{{ url_for('home') }}" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="height: 40px; vertical-align: middle;">
+                <strong>Quantum Rainbow Tables</strong>
+            </a>
+            <nav>
+                <a href="#menu"></a>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="{{ url_for('quantum_rainbowtable') }}">Quantum Rainbow Table</a></li>
+                <li><a href="{{ url_for('quantum_search') }}">Quantum Search</a></li>
+                <li><a href="{{ url_for('quantum') }}">Grover's Algorithm</a></li>
+                <li><a href="{{ url_for('rainbow_table') }}">Rainbow Tables</a></li>
+            </ul>
+        </nav>
+
+        <!-- Banner -->
+        <section id="banner" class="major">
+            <div class="inner">
+                <header class="major">
+                    <h1>QIris</h1>
+                </header>
+                <div class="content">
+                    <div class="text-wrapper">
+                        <p><span class="capitalized">by Singapore Institute of Technology</span></p>
+                        <p class="no-gap">Goh Geok Ling, Goh Yue Jun, Kenan Puay-Tee Tan, Lee Jun Quan, Tan Jia Ye</p>
+                    </div>
+                    <ul class="actions">
+                        <li><a href="#one" class="button next scrolly">Try it out!</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- One -->
+            <section id="one" class="tiles">
+                <article>
+                    <span class="image">
+                        <img src="{{ url_for('static', filename='images/rainbow-tables.jpg') }}" alt="" />
+                    </span>
+                    <header class="major">
+                        <h3><a href="{{ url_for('quantum_rainbowtable') }}" class="link">Quantum Rainbow Table Explaination</a></h3>
+                        <p>Understand how we utilise Quantum Rainbow Table</p>
+                    </header>
+                </article>
+                
+                <article>
+                    <span class="image">
+                        <img src="{{ url_for('static', filename='images/aldebran.jpg') }}" alt="" />
+                    </span>
+                    <header class="major">
+                        <h3><a href="{{ url_for('quantum') }}" class="link">Grover's Algorithm</a></h3>
+                        <p>Explore and understand how it enhances search efficiency</p>
+                    </header>
+                </article>
+
+                
+                <article>
+                    <span class="image">
+                        <img src="{{ url_for('static', filename='images/360.jpg') }}" alt="" />
+                    </span>
+                    <header class="major">
+                        <h3><a href="{{ url_for('quantum_search') }}" class="link">Quantum Search</a></h3>
+                        <p>Grover's algorithm is used to perform quantum searches on rainbow tables</p>
+                    </header>
+                </article>
+
+                <article>
+                    <span class="image">
+                        <img src="{{ url_for('static', filename='images/rainbow.jpg') }}" alt="" />
+                    </span>
+                    <header class="major">
+                        <h3><a href="{{ url_for('rainbow_table') }}" class="link">Rainbow Tables</a></h3>
+                        <p>Understand what they are and how they are utilised</p>
+                    </header>
+                </article>
+               
+            </section>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

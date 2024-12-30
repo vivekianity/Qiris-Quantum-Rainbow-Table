@@ -1,0 +1,412 @@
+/* Navbar Styles */
+nav {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.nav-left a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-left a .nav-icon {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.nav-left a .nav-title {
+    font-weight: 700;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+.nav-right a:hover {
+    color: #ecf0f1;
+}
+
+/* Hamburger Menu Styles */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav-right {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #2c3e50;
+        padding: 1em;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-right.active {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
+
+/* General Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px; /* Adjust padding to avoid content being cut off by the navbar */
+    margin: 0;
+    background-image: url("/static/images/bg.jpg"), url("/static/images/overlay.png");
+    background-size: cover, cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-image: url("/static/images/bg.jpg"), url("/static/images/overlay.png");
+    background-size: cover, cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Add margin to separate sections */
+    width: 70%; /* Adjust width to ensure responsiveness */
+    max-width: 1200px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+}
+
+p {
+    margin-top: 1em;
+    font-size: 1.2em;
+    font-weight: 400;
+    text-align: center;
+}
+
+.circuit-description,
+.state-preparation-description,
+.oracle-description,
+.grover-diffusion-histogram-description,
+.grover-diffusion-description {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #2c3e50;
+    text-align: left;
+    width: 90%;
+}
+
+.circuit-description ul,
+.state-preparation-description p,
+.oracle-description p,
+.grover-diffusion-histogram-description p,
+.grover-diffusion-description p {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.circuit-description li {
+    margin-bottom: 10px;
+}
+
+.circuit-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.circuit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+    padding-top: 20px;
+}
+
+.qubit {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.state {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.line {
+    width: 600px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+}
+
+.line::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.big-box-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    position: absolute;
+    z-index: 2;
+    height: 220px; /* Ensure it expands to fit content */
+    padding-top: 20px; /* Add padding to avoid content being cut off */
+    padding-left: 146px;
+}
+
+.big-box {
+    width: 120px; /* Width of each box */
+    height: 100%; /* Full height of the container */
+    background-color: white; /* White background */
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Ensure other elements can appear in front */
+}
+
+.boxes-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.box-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.box {
+    width: 70px;
+    height: 70px;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid blue;
+    position: relative;
+    z-index: 5; /* Default z-index for boxes */
+}
+
+.box-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.box-content {
+    text-align: center;
+    font-size: 10px;
+}
+
+.big-box.hidden {
+    visibility: hidden; /* Hide the State Preparation box while maintaining its space */
+}
+
+.big-o {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.big-o img {
+    width: 280px;
+    height: auto;
+    margin-right: 10px;
+    margin-left: 150px;
+}
+
+.big-o span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 150px;
+}
+
+/* Back Home Button */
+.back-home-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-home-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 0.9em;
+}
+
+.back-home-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.back-home-btn i {
+    margin-right: 4px;
+}
+
+/* Button Styles */
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button i {
+    margin-right: 8px;
+}
+
+/* Additional Features */
+.additional-features {
+    background: linear-gradient(to right, #f5f5f5, #ecf0f1);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.additional-features h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .big-o img, .big-o span {
+        margin-left: 0;
+        font-size: 16px;
+    }
+
+    .big-box-container {
+        padding-left: 20px;
+    }
+
+    .line {
+        width: 100%;
+    }
+
+    .big-box {
+        width: 100px;
+    }
+
+    .box {
+        width: 60px;
+        height: 60px;
+        font-size: 16px;
+    }
+}

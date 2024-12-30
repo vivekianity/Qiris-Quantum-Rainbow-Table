@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-Qubit Quantum Circuit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quantum.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="main-container">
+        <div class="container">
+            <h1>4-Qubit Grover Circuit</h1>
+            <div class="circuit-description">
+                <ul>
+                    <li>Qubits initialized to the state |0></li>
+                    <li>State Preparation puts all the qubits into an equal superposition state</li>
+                    <li>The Oracle marks the state of the item that we want to find</li>
+                    <li>Grover Diffusion amplifies the probability of the marked state</li>
+                    <li>Measurement measures the qubits</li>
+                </ul>
+            </div>
+            <div class="circuit-wrapper">
+                <div class="big-box-container">
+                    <div class="big-box">State Preparation</div>
+                    <div class="big-box">Oracle</div>
+                    <div class="big-box">Grover diffusion</div>
+                    <div class="big-box">Measurement</div>
+                </div>
+                <div class="circuit">
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1>State Preparation</h1>
+            <div class="state-preparation-description">
+                <p>The usual state preparation creates a superposition of all possible states. In this case, we only want to search those found in the boxes. This state preparation creates a superposition of all the states that were inputted.</p>
+            </div>
+            <button id="state-preparation-btn">Show State Preparation</button>
+            <h2>List</h2>
+            <div class="boxes-wrapper" id="state-preparation-boxes">
+                <div class="box-row">
+                    <!-- First row of boxes -->
+                    <div class="box">
+                        <div class="box-content">piL</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">RpV</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">4dy</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">zTU</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">J8r</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">sm3</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">9U3</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">8xG</div>
+                    </div>
+                </div>
+                <div class="box-row">
+                    <!-- Second row of boxes -->
+                    <div class="box">
+                        <div class="box-content">OPb</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">Aoj</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">Twe</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">WnM</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">dzV</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">VQD</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">eXo</div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">8JX</div>
+                    </div>
+                </div>
+            </div>
+            <div class="circuit-wrapper">
+                <div class="big-box-container">
+                    <div class="big-box" id="state-preparation">State Preparation</div>
+                </div>
+                <div class="circuit">
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Oracle</h1>
+            <div class="oracle-description">
+                <p>In this case, we want to find V8O, thus we mark the state of the oracle to be V8O in this test case.</p>
+            </div>
+            <button id="oracle-btn">Show Oracle</button>
+            <div class="boxes-wrapper" id="oracle-boxes">
+                <div class="box-row">
+                    <!-- First row of boxes -->
+                    <div class="box">
+                        <div class="box-content">V8O</div>
+                    </div>
+                </div>
+            </div>
+            <div class="circuit-wrapper">
+                <div class="big-box-container">
+                    <div class="big-box hidden"></div>
+                    <div class="big-box" id="oracle">Oracle</div>
+                </div>
+                <div class="circuit">
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Grover Diffusion</h1>
+            <div class="grover-diffusion-description">
+                <p>The Grover Diffusion amplifies the probability of the marked state by repeating the process based on the Big O notation of square root N times.</p>
+            </div>
+            <div class="circuit-wrapper">
+                <div class="big-box-container">
+                    <div class="big-box hidden"></div>
+                    <div class="big-box" id="oracle1">Oracle</div>
+                    <div class="big-box">Grover diffusion</div>
+                </div>
+                <div class="circuit">
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="qubit">
+                        <div class="state">|0⟩</div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="big-o">
+                <img src="{{ url_for('static', filename='images/download.png') }}" alt="big-o notation">
+                <span>Repeat O(√N) times</span>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Grover Diffusion Histogram</h1>
+            <div class="grover-diffusion-histogram-description">
+                <p>The Histogram shows an example of the probability of each item during the amplification process.</p>
+            </div>
+            <button id="start-animation-btn">Start Animation</button>
+            <canvas id="myChart" width="700" height="400"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="{{ url_for('static', filename='js/quantum.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

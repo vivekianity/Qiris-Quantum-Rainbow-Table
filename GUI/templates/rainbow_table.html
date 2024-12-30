@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understand Rainbow Tables</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rainbow_table.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="{{ url_for('static', filename='js/rainbow_table.js') }}" defer></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    {% include 'navbar.html' %}
+    <style>
+        /* Add custom CSS here */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+   
+    <div id="flashMessage" class="flash-message hidden"></div>
+    <div class="main-container">
+        <main class="container">
+            <section class="table-section hidden" id="live-feed">
+                <h1 id="live-feed-title" class="hidden">Live Chain Creation</h1>
+                <p id="liveChainDescription" class="description hidden">Here you can see how each plaintext value is transformed step-by-step through hashing and reduction functions to form a rainbow table chain.</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plaintext</th>
+                                <th>1<sup>st</sup> MD5 Hash</th>
+                                <th>1<sup>st</sup> Reduction</th>
+                                <th>2<sup>nd</sup> MD5 Hash</th>
+                                <th>2<sup>nd</sup> Reduction</th>
+                                <th>3<sup>rd</sup> MD5 Hash</th>
+                                <th>3<sup>rd</sup> Reduction</th>
+                                <th>4<sup>th</sup> MD5 Hash</th>
+                                <th>4<sup>th</sup> Reduction</th>
+                            </tr>
+                        </thead>
+                        <tbody id="live-feed-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="input-table" id="inputTableSection">
+                <h1 id="inputTableTitle"></h1>
+                <p id="createTableDescription" class="description"></p>
+                <p id="createTableDescription2" class="description hidden"></p>
+                <div id="rainbowTableContainer" class="rainbow-table-container hidden">
+                    <br>
+                    <br>
+                    <h1 id="rainbowTableHeader">Rainbow Table</h1>
+                    <table id="userRainbowTable">
+                        <thead>
+                            <tr>
+                                <th>Start of Chain</th>
+                                <th>End of Chain</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userRainbowTable-body">
+                            <tr>
+                                <td class="start-of-chain"></td>
+                                <td class="end-of-chain"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="inputMethodButtons" class="hidden button-container">
+                    <p id="inputMethodButtonsDesc" class="description">Choose your input method.</p>
+                    <button id="manualInputButton"><i class="fas fa-plus"></i>Manual</button>
+                    <button id="randomInputButton"><i class="fas fa-list-ol"></i>Select Number of Rows</button>
+                    <button id="fileUploadButton"><i class="fas fa-upload"></i>Upload a .txt file</button>
+                </div>                
+                <form id="rainbowForm" class="hidden">
+                    <input type="text" id="initialWord" placeholder="Enter text value" required>
+                    <button type="submit" id="addButton"><i class="fas fa-plus"></i> Add</button>
+                </form>
+                <form id="randomGenForm" class="hidden">
+                    <label for="valueCount">Select number of start of chain values: </label>
+                    <select id="valueCount" name="valueCount">
+                        <option value="none" selected disabled>Select an option</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </form>
+                <div id="buttonContainer" class="button-container hidden">
+                    <button id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
+                    <button id="downloadButton" class="download-btn hidden" disabled><i class="fas fa-download"></i> Download the Results</button>
+                </div>              
+                <button id="startLiveFeedButton" class="hidden"><i class="fas fa-play"></i> Start Generating Chains Live</button>
+            </section>
+            <section id="searchSection" class="search-section hidden">
+                <h1>Classical Search</h1>
+                <p id="searchDescription" class="description">Search for a hash in the created rainbow table to see if it matches any of the chains. Click on a hash in the Live Chain Creation Table to copy it to clipboard.</p>
+                <form id="searchForm">
+                    <input type="text" id="searchHash" placeholder="Enter hash to search" required>
+                    <button type="submit"><i class="fas fa-search"></i> Search</button>
+                </form>
+                <div id="searchResults" class="table-container hidden">
+                    <table>
+                        <thead id="searchResultsTableHead" class="hidden">
+                            <tr>
+                                <th>Hash</th>
+                                <th>4th Reduction</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchResultsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <p id="nextButtonText" class="description hidden"></p>
+                <button id="nextButton" class="hidden">Next</button>
+            </section>
+        </main>
+    </div>
+</body>
+<script>
+    // JavaScript to handle the toggle of the hamburger menu
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+        document.querySelector('.nav-right').classList.toggle('active');
+    });
+</script>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods Explanation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quantum_rainbowtable.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="{{ url_for('static', filename='js/quantum_rainbowtable.js') }}"></script>
+    {% include 'navbar.html' %}
+    <style>
+        /* General styles */
+       
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Tab styling */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            margin: 0 10px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .tab:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .tab.active {
+            background-color: #0056b3;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 1.4em;
+            color: #2c3e50;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .list-item {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .list-item:hover {
+            background-color: #d9edf7;
+        }
+
+        /* Consistent Spacing */
+        .method-section p,
+        .method-section button,
+        .method-section h3,
+        .method-section div {
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tab {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            main {
+                margin: 20px;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Methods Explanation</h1>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <div class="tab active" data-target="method-a">Method A: Simple Hash Bucket</div>
+            <div class="tab" data-target="method-b">Method B: ASCII Sum Bucket Approach</div>
+        </div>
+
+        <div class="tab-content active" id="method-a">
+            <div class="method-section">
+                <h2>Method A: Simple Hash Bucket</h2>
+                <p>Generation of Simple Hash Bucket</p>
+                <p>A 9-bit list utilized instead of the usual 16-bit list.</p>
+
+                <button onclick="distributeItems1()">Distribute</button>
+                <div id="calculationDisplay1" style="height: auto;"></div>
+                <div id="bucketsContainer1"></div>
+
+                <p>Given that we want to find the hash "8ae4df6886632a5c1732d08cc9c4186d"</p>
+                <h3>Step 1</h3>
+                <button onclick="reduction1()">Reduce the Hash Value</button>
+                <div id="reduction1" style="height: auto;"></div>
+
+                <h3>Step 2</h3>
+                <button onclick="bucket2()">Find the Bucket Key & Bucket value</button>
+                <div id="bucket2" style="height: auto;"></div>
+
+                <h3>Step 3</h3>
+                <p>Linear Search to check if the Bucket Key exists. If not found, go to Step 5.</p>
+                <button onclick="linearSearch()">Linear search of Bucket List</button>
+                <div id="list-container">
+                    <div class="list-item">3</div>
+                    <div class="list-item">4</div>
+                    <div class="list-item">6</div>
+                    <div class="list-item">7</div>
+                    <div class="list-item">8</div>
+                    <div class="list-item">9</div>
+                    <div class="list-item">13</div>
+                    <div class="list-item">14</div>
+                    <div class="list-item">16</div>
+                    <div class="list-item">17</div>
+                    <div class="list-item">21</div>
+                    <div class="list-item">22</div>
+                    <div class="list-item">25</div>
+                    <div class="list-item">31</div>
+                </div>
+                <div id="result"></div>
+
+                <h3>Step 4</h3>
+                <p>Using the Bucket Key found in step 3, use <a href="/quantum" target="_blank">Grover's Algorithm</a> to search if the value in the bucket exists. If the result returns not found, go to Step 5.</p>
+
+                <h3>Step 5</h3>
+                <p>Rebuild the reduction plaintext, and repeat from Step 2 with the new reduced plaintext.</p>
+
+                <h3>Step 6</h3>
+                <p>The reduced plaintext has been found. Congratulations!</p>
+                <button onclick="rebuild_chain()">Now rebuild the chain to get the corresponding plaintext.</button>
+                <div id="chain1"></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="method-b">
+            <div class="method-section">
+                <h2>Method B: ASCII Sum Bucket Approach</h2>
+                <p>Generation of ASCII Sum Bucket</p>
+                <p>The ASCII value of each character is used for this calculation.</p>
+
+                <button onclick="distributeItems()">Distribute</button>
+                <div id="calculationDisplay" style="height: auto;"></div>
+                <div id="bucketsContainer"></div>
+
+                <p>Given that we want to find the hash "8ae4df6886632a5c1732d08cc9c4186d"</p>
+                <h3>Step 1</h3>
+                <button onclick="reduction()">Reduce the Hash Value</button>
+                <div id="reduction" style="height: auto;"></div>
+
+                <h3>Step 2</h3>
+                <button onclick="bucket1()">Find the Bucket Key & Bucket value</button>
+                <div id="bucket1" style="height: auto;"></div>
+
+                <h3>Step 3</h3>
+                <p>Using the Bucket Key found in step 2, use <a href="/quantum" target="_blank">Grover's Algorithm</a> to search if the bucket exists. If not, go to Step 5.</p>
+
+                <h3>Step 4</h3>
+                <p>If Grover's Algorithm returns found, perform a linear search within the bucket. If the reduced plaintext does not exist, go to Step 5.</p>
+
+                <button onclick="linearSearch1()">Linear search of item inside Bucket 8</button>
+                <div id="list-container1">
+                    <div class="list-item">RpV</div>
+                    <div class="list-item">xnb</div>
+                    <div class="list-item">qCt</div>
+                </div>
+
+                <h3>Step 5</h3>
+                <p>Rebuild the reduction plaintext, and repeat from Step 2 with the new reduced plaintext.</p>
+
+                <h3>Step 6</h3>
+                <p>If the reduced plaintext is found, Congratulations!</p>
+                <button onclick="rebuild_chain1()">Now rebuild the chain to get the corresponding plaintext.</button>
+                <div id="chain2"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript to handle tab switching
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+
+                // Add active class to the clicked tab and its corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

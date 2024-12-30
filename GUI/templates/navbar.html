@@ -1,0 +1,18 @@
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="nav-icon">
+            <span class="nav-title">QUANTUM RAINBOW TABLES</span>
+        </a>
+    </div>
+    <div class="nav-right">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('quantum_rainbowtable') }}">Quantum Rainbow Tables</a>
+        <a href="{{ url_for('quantum') }}">Grover's Algorithm</a>
+        <a href="{{ url_for('quantum_search') }}">Quantum Search</a>
+        <a href="{{ url_for('rainbow_table') }}">Rainbow Tables</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+</nav>

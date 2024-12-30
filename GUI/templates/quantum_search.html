@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quantum_search.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div id="loading-indicator" class="loading-indicator">
+        <img src="{{ url_for('static', filename='images/loading.gif') }}" alt="Loading...">
+        <p>Please wait...</p>
+    </div>
+    <div class="main-container">
+        <main class="container">
+            <section class="search-section fade-in">
+                <h1 class="centered">Quantum Search</h1>
+                <div class="instructions-section centered fade-in">
+                    <h2>How to Use</h2>
+                    <ol class="instructions-list">
+                        <li>Click on the <strong>Choose File</strong> button and select the list of passwords you want.</li>
+                        <li>Enter the <strong>MD5 hash</strong> you want to find.</li>
+                        <li>Click on the <strong>Search</strong> button.</li>
+                    </ol>
+                    <p class="remark">**If no file is uploaded, the system will use a <a href="{{ url_for('static', filename='default.txt') }}" download>default file</a>.**</p>
+                </div>
+                <div class="search-container">
+                    <div class="method fade-in">
+                        <h2>Method A: Simple Hash Bucket Approach</h2>
+                        <form id="method1-form" action="{{ url_for('quantum_search_method_1') }}" method="post" enctype="multipart/form-data">
+                            <input type="text" id="md5_hash1" name="md5_hash" placeholder="Enter Hash..." required aria-label="Enter MD5 Hash">
+                            <input type="file" id="file1" name="file" accept=".txt" aria-label="Choose File">
+                            <button type="submit"><i class="fas fa-search"></i> Search</button>
+                        </form>
+                        <div id="method1-result"></div>
+                        <div class="method-description">
+                            <ol class="styled-list">
+                                <li>In this method, the final reduction plaintext are placed into Bucket based on the simplified alternative hashing method.</li>
+                                <li>Based on the Hash inputted, the Hash is first reduced into the final reduction plaintext.</li>
+                                <li>Hash will perform the simplified alternative hashing method.</li>
+                                <li>A lookup of the <strong>Bucket</strong> of the Hash inputted will be done.</li>
+                                <li>If the <strong>Bucket</strong> exists, a search using the Grover's Algorithm will check if the <strong>Bucket Key</strong> of the Hash inputted exists in the Rainbow Table's Bucket.</li>
+                                <li>If the result is found, a linear search is done to locate the inputter's hash, and the chain is rebuilt to retrieve the plaintext.</li>
+                                <li>Else if the result is not found, the inputted hash is reduced again, and the process repeats from step 3 again.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="method fade-in">
+                        <h2>Method B: ASCII Sum Bucket Approach</h2>
+                        <form id="method2-form" action="{{ url_for('quantum_search_method_2') }}" method="post" enctype="multipart/form-data">
+                            <input type="text" id="md5_hash2" name="md5_hash" placeholder="Enter Hash..." required aria-label="Enter MD5 Hash">
+                            <input type="file" id="file2" name="file" accept=".txt" aria-label="Choose File">
+                            <button type="submit"><i class="fas fa-search"></i> Search</button>
+                        </form>
+                        <div id="method2-result"></div>
+                        <div class="method-description">
+                            <ol class="styled-list">
+                                <li>In this method, the final reduction plaintext are placed into Bucket based on the ASCII Sum Bucket Approach.</li>
+                                <li>Based on the Hash inputted, the Hash is first reduced into the final reduction plaintext.</li>
+                                <li>Hash will perform the ASCII Sum Bucket method.</li>
+                                <li>A search using the Grover's Algorithm will check if the <strong>Bucket Key</strong> of the Hash inputted exists in the Rainbow Table's.</li>
+                                <li>If the result is found, a linear search is done to locate the inputter's hash, and the chain is rebuilt to retrieve the plaintext.</li>
+                                <li>Else if the result is not found, the inputted hash is reduced again, and the process repeats from step 3 again.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navRight = document.querySelector('.nav-right');
+    
+            navToggle.addEventListener('click', function () {
+                navRight.classList.toggle('active');
+            });
+    
+            const method1Form = document.getElementById('method1-form');
+            const method2Form = document.getElementById('method2-form');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const method1Result = document.getElementById('method1-result');
+            const method2Result = document.getElementById('method2-result');
+    
+            function validateHash(input) {
+                const md5Regex = /^[a-f0-9]{32}$/i;
+                if (!md5Regex.test(input.value)) {
+                    input.setCustomValidity("Please enter a valid MD5 hash");
+                } else {
+                    input.setCustomValidity("");  // Clear the error
+                }
+            }
+    
+            function handleFormSubmit(event, form, resultContainer) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const hashInput = form.querySelector('input[name="md5_hash"]');
+                validateHash(hashInput);
+                if (!hashInput.checkValidity()) {
+                    alert("Please enter a valid MD5 hash");
+                    return;
+                }
+    
+                loadingIndicator.style.display = 'flex';
+    
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        loadingIndicator.style.display = 'none';
+                        if (data.status === 'success') {
+                            resultContainer.innerHTML = `<div class="flash success">${data.message}</div>`;
+                        } else {
+                            resultContainer.innerHTML = `<div class="flash error">${data.message}</div>`;
+                        }
+                    })
+                    .catch(error => {
+                        loadingIndicator.style.display = 'none';
+                        resultContainer.innerHTML = `<div class="flash error">An error occurred: ${error.message}</div>`;
+                    });
+            }
+    
+            method1Form.addEventListener('submit', function (event) {
+                handleFormSubmit(event, method1Form, method1Result);
+            });
+    
+            method2Form.addEventListener('submit', function (event) {
+                handleFormSubmit(event, method2Form, method2Result);
+            });
+    
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach(fileInput => {
+                fileInput.addEventListener("change", function (event) {
+                    const file = event.target.files[0];
+                    if (file && file.type !== "text/plain") {
+                        alert("Please upload a .txt file");
+                        event.target.value = "";  // Clear the input
+                    }
+                });
+            });
+    
+            const hashInputs = document.querySelectorAll('input[name="md5_hash"]');
+            hashInputs.forEach(hashInput => {
+                hashInput.addEventListener("input", function (event) {
+                    validateHash(hashInput);
+                });
+            });
+    
+            // Hide flash messages after 5 seconds, except for persistent messages
+            setTimeout(function () {
+                const flashMessages = document.querySelectorAll('.flash:not(.persistent)');
+                flashMessages.forEach(flash => {
+                    flash.style.transition = "opacity 1s";
+                    flash.style.opacity = 0;
+                    setTimeout(() => {
+                        flash.remove();
+                    }, 1000); // Remove from DOM after transition
+                });
+            }, 5000); // 5 seconds
+        });
+    </script>    
+</body>
+</html>
